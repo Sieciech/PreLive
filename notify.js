@@ -11,6 +11,7 @@ window.setTimeouts = [];
 window.setTimeout = function(func, time)
 {
   var fstr = func.toString();
+  console.log(fstr, func);
   if(fstr.match('window.setTimeout(update,'))
   {
     var i = window.origSetTimeout(newUpdate, time);
