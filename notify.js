@@ -14,11 +14,11 @@ function changeFavicon(src) {
 }
 function changeFaviconRed()
 {
-  changeFavicon('http://michal.sieciechowicz.pl/live-pre/favicon.png');
+  changeFavicon('http://michal.sieciechowicz.pl/live-pre/fav.php?color=red&id='+newUpdateCount);
 }
 function changeFaviconGreen()
 {
-  changeFavicon('https://pre.corrupt-net.org/favicon.png');
+  changeFavicon('http://michal.sieciechowicz.pl/live-pre/fav.php?id='+newUpdateCount);
 }
 function blinkFavicon()
 {
@@ -58,6 +58,7 @@ function newUpdate() {
 				newUpdateStart = true;
 				newUpdateHTML = last;
 				document.title = newUpdateCount+') '+last;
+				changeFaviconGreen();
 				console.log('Cos starego ', last);
 
 			}
