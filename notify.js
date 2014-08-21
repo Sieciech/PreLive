@@ -1,5 +1,6 @@
 newUpdateHTML = '';
 newUpdateStart = false;
+newUpdateCount = 0;
 function newUpdate() {
 	var ts = new Date().getTime();
 	$.get("lastpred.php", {
@@ -20,12 +21,13 @@ function newUpdate() {
 			if(newUpdateStart == false)	
 			{
 				newUpdateStart = true;
-				document.title = last;
+				document.title = newUpdateCount+') '+last;
 			}
 			else
 			{
+				newUpdateCount++;
 				newUpdateHTML = last;
-				document.title = last;
+				document.title = newUpdateCount+') '+last;
 				console.log('Cos nowego ', last);
 				//alert('Coś nowego!');
 			}
