@@ -12,9 +12,9 @@ function newUpdate() {
 	}, function(data) {
 		$("#livetable").html(data);
 		console.log('data', data);
-		var last = '';
 		var m = data.match(/([0-9]{4}\-[0-9]{2}\-[0-9]{2}\s{0,}[0-9]{2}:[0-9]{2}:[0-9]{2})/);
 		console.log('match', m);
+		var last = m[1];
 		if(newUpdateHTML != last)
 		{
 			if(newUpdateStart == false)	
@@ -24,6 +24,7 @@ function newUpdate() {
 			else
 			{
 				newUpdateHTML = last;
+				document.title = last;
 				//alert('Coś nowego!');
 			}
 		}
