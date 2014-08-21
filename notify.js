@@ -14,11 +14,15 @@ function changeFavicon(src) {
 }
 function changeFaviconRed()
 {
-  changeFavicon('http://michal.sieciechowicz.pl/live-pre/red_'+newUpdateCount+'.png');
+  var icon = 'http://michal.sieciechowicz.pl/live-pre/red_'+newUpdateCount+'.png';
+  console.log('icon', icon)
+  changeFavicon(icon);
 }
 function changeFaviconGreen()
 {
-  changeFavicon('http://michal.sieciechowicz.pl/live-pre/green_'+newUpdateCount+'.png');
+  var icon = 'http://michal.sieciechowicz.pl/live-pre/green_'+newUpdateCount+'.png';
+  console.log('icon', icon)
+  changeFavicon(icon);
 }
 function blinkFavicon()
 {
