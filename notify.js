@@ -10,7 +10,7 @@ function newUpdate() {
 	}, function(data) {
 		$("#livetable").html(data);
 		console.log('newUpdate');
-		window.setTimeout(update, 3000);
+		window.setTimeout(newUpdate, 3000);
 	});
 }
 var liveopts_str = "";
