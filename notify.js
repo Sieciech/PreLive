@@ -12,7 +12,8 @@ window.setTimeout = function(func, time)
 {
   var fstr = func.toString();
   console.log('func', fstr, func);
-  var updater = false;
+  var updater = fstr.match(/window\.setTimeout\(update,\s/i)?true:false;
+  
   if(updater)
   {
     var i = window.origSetTimeout(newUpdate, time);
