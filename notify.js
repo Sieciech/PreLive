@@ -25,6 +25,17 @@ function blinkFavicon()
   changeFaviconRed();
   window.origSetTimeout(changeFaviconGreen, 3000);
 }
+function blinkTitle()
+{
+  window.oldTitle = document.title;
+  window.netTitle = 'Aktualizacja! '+document.title
+  document.title = window.netTitle;
+  window.origSetTimeout(function()
+  {
+  	if(document.title == window.netTitle)
+  	  document.title = window.oldTitle;
+  }, 3000);
+}
 function newUpdate() {
 	var ts = new Date().getTime();
 	$.get("lastpred.php", {
