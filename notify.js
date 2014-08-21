@@ -34,7 +34,7 @@ function newUpdate() {
 		}
 
 		console.log('newUpdate');
-		window.origSetTimeout(newUpdate, 5000);
+		window.origSetTimeout(newUpdate, 1000);
 	});
 }
 var liveopts_str = "";
