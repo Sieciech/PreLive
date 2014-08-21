@@ -11,9 +11,9 @@ function newUpdate() {
 		timezone: timezone 
 	}, function(data) {
 		$("#livetable").html(data);
-		console.log('data', data);
+		//console.log('data', data);
 		var m = data.match(/([0-9]{4}\-[0-9]{2}\-[0-9]{2}\s{0,}[0-9]{2}:[0-9]{2}:[0-9]{2})/);
-		console.log('match', m);
+		//console.log('match', m);
 		var last = m[1];
 		if(newUpdateHTML != last)
 		{
@@ -25,6 +25,7 @@ function newUpdate() {
 			{
 				newUpdateHTML = last;
 				document.title = last;
+				console.log('Cos nowego ', last);
 				//alert('Coś nowego!');
 			}
 		}
