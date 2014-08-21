@@ -20,6 +20,7 @@ function newUpdate() {
 			if(newUpdateStart == false)	
 			{
 				newUpdateStart = true;
+				document.title = last;
 			}
 			else
 			{
