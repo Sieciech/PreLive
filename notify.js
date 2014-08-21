@@ -11,7 +11,8 @@ function newUpdate() {
 		timezone: timezone 
 	}, function(data) {
 		$("#livetable").html(data);
-		if(newUpdateHTML != data)
+		console.log('data', data);
+		if(newUpdateHTML != last)
 		{
 			if(newUpdateStart == false)	
 			{
@@ -19,13 +20,13 @@ function newUpdate() {
 			}
 			else
 			{
-				newUpdateHTML = data;
-				alert('Coś nowego!');
+				newUpdateHTML = last;
+				//alert('Coś nowego!');
 			}
 		}
 
 		console.log('newUpdate');
-		window.origSetTimeout(newUpdate, 1000);
+		window.origSetTimeout(newUpdate, 5000);
 	});
 }
 var liveopts_str = "";
