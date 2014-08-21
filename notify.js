@@ -23,13 +23,7 @@ function changeFaviconGreen()
 function blinkFavicon()
 {
   changeFaviconRed();
-  window.origSetTimeout(changeFaviconGreen, 400);
-  window.origSetTimeout(changeFaviconRed, 500);
-  window.origSetTimeout(changeFaviconGreen, 900);
-  window.origSetTimeout(changeFaviconRed, 1000);
-  window.origSetTimeout(changeFaviconGreen, 1400);
-  window.origSetTimeout(changeFaviconRed, 1500);
-  window.origSetTimeout(changeFaviconGreen, 1900);
+  window.origSetTimeout(changeFaviconGreen, 3000);
 }
 function newUpdate() {
 	var ts = new Date().getTime();
