@@ -61,7 +61,7 @@ function newUpdate() {
 			}
 		}
 
-		console.log('newUpdate');
+		//console.log('newUpdate');
 		window.origSetTimeout(newUpdate, 1000);
 	});
 }
@@ -105,7 +105,7 @@ window.setTimeout = function(func, time)
 {
   var fstr = func.toString();
   var updater = fstr.match(/window\.setTimeout\(update,\s/i)?true:false;
-  console.log('func', updater);
+  //console.log('func', updater);
 
   if(updater)
   {
