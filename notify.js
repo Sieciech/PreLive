@@ -1,3 +1,5 @@
+newUpdateHTML = '';
+newUpdateStart = false;
 function newUpdate() {
 	var ts = new Date().getTime();
 	$.get("lastpred.php", {
@@ -9,8 +11,21 @@ function newUpdate() {
 		timezone: timezone 
 	}, function(data) {
 		$("#livetable").html(data);
+		if(newUpdateHTML != data)
+		{
+			if(newUpdateStart == false)	
+			{
+				newUpdateStart = true;
+			}
+			else
+			{
+				newUpdateHTML = data;
+				alert('Coś nowego!');
+			}
+		}
+
 		console.log('newUpdate');
-		window.setTimeout(newUpdate, 3000);
+		window.origSetTimeout(newUpdate, 1000);
 	});
 }
 var liveopts_str = "";
