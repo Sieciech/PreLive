@@ -14,11 +14,11 @@ function changeFavicon(src) {
 }
 function changeFaviconRed()
 {
-  changeFavicon('http://michal.sieciechowicz.pl/live-pre/favicon.png?rnd='+Math.round(Math.random()*100000000));
+  changeFavicon('http://michal.sieciechowicz.pl/live-pre/favicon.png');
 }
 function changeFaviconGreen()
 {
-  changeFavicon('https://pre.corrupt-net.org/favicon.png?rnd='+Math.round(Math.random()*100000000));
+  changeFavicon('https://pre.corrupt-net.org/favicon.png');
 }
 function blinkFavicon()
 {
