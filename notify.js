@@ -1,6 +1,18 @@
 newUpdateHTML = '';
 newUpdateStart = false;
 newUpdateCount = 0;
+function changeFavicon(src) {
+ var link = document.createElement('link'),
+     oldLink = document.getElementById('dynamic-favicon');
+ link.id = 'dynamic-favicon';
+ link.rel = 'shortcut icon';
+ link.href = src;
+ if (oldLink) {
+  document.head.removeChild(oldLink);
+ }
+ document.head.appendChild(link);
+}
+
 function newUpdate() {
 	var ts = new Date().getTime();
 	$.get("lastpred.php", {
@@ -31,6 +43,7 @@ function newUpdate() {
 				newUpdateCount++;
 				newUpdateHTML = last;
 				document.title = newUpdateCount+') '+last;
+				changeFavicon('http://michal.sieciechowicz.pl/live-pre/fav.gif?rnd='+Math.round(Math.random()*100000000));
 				console.log('Cos nowego ', last);
 				//alert('Coś nowego!');
 			}
