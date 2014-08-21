@@ -21,6 +21,7 @@ function newUpdate() {
 			if(newUpdateStart == false)	
 			{
 				newUpdateStart = true;
+				newUpdateHTML = last;
 				document.title = newUpdateCount+') '+last;
 				console.log('Cos starego ', last);
 
