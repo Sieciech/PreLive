@@ -22,6 +22,8 @@ function newUpdate() {
 			{
 				newUpdateStart = true;
 				document.title = newUpdateCount+') '+last;
+				console.log('Cos starego ', last);
+
 			}
 			else
 			{
