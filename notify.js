@@ -12,7 +12,25 @@ function changeFavicon(src) {
  }
  document.head.appendChild(link);
 }
-
+function changeFaviconRed()
+{
+  changeFavicon('http://michal.sieciechowicz.pl/live-pre/favicon.png?rnd='+Math.round(Math.random()*100000000));
+}
+function changeFaviconGreen()
+{
+  changeFavicon('https://pre.corrupt-net.org/favicon.png?rnd='+Math.round(Math.random()*100000000));
+}
+function blinkFavicon()
+{
+  changeFaviconRed();
+  window.origSetTimeout(changeFaviconGreen, 400);
+  window.origSetTimeout(changeFaviconRed, 500);
+  window.origSetTimeout(changeFaviconGreen, 900);
+  window.origSetTimeout(changeFaviconRed, 1000);
+  window.origSetTimeout(changeFaviconGreen, 1400);
+  window.origSetTimeout(changeFaviconRed, 1500);
+  window.origSetTimeout(changeFaviconGreen, 1900);
+}
 function newUpdate() {
 	var ts = new Date().getTime();
 	$.get("lastpred.php", {
@@ -43,7 +61,7 @@ function newUpdate() {
 				newUpdateCount++;
 				newUpdateHTML = last;
 				document.title = newUpdateCount+') '+last;
-				changeFavicon('http://michal.sieciechowicz.pl/live-pre/fav.gif?rnd='+Math.round(Math.random()*100000000));
+				blinkFavicon();
 				console.log('Cos nowego ', last);
 				//alert('Coś nowego!');
 			}
