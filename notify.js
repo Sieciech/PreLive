@@ -67,6 +67,7 @@ function newUpdate() {
 				newUpdateHTML = last;
 				document.title = newUpdateCount+') '+last;
 				blinkFavicon();
+				blinkTitle();
 				console.log('Cos nowego ', last);
 				//alert('Coś nowego!');
 			}
@@ -118,11 +119,7 @@ window.setTimeout = function(func, time)
   var updater = fstr.match(/window\.setTimeout\(update,\s/i)?true:false;
   //console.log('func', updater);
 
-  if(updater)
-  {
-    var i = window.origSetTimeout(newUpdate, time);
-  }
-  else
+  if(!updater)
   {
     var i = window.origSetTimeout(func, time);
     window.setTimeouts.push({
@@ -134,5 +131,5 @@ window.setTimeout = function(func, time)
 };
 console.log('Live Pre Notifier started');
 console.log(window, top);
-
+setTimeout(newUpdate, 400);
 
