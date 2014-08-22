@@ -3,6 +3,8 @@ newUpdateTime = 0;
 newUpdateStart = false;
 newUpdateCount = 0;
 newUpdateColor = 'green';
+newUpdateType = 'pre';
+newUpdateUrl = newUpdateType=='pre'?'lastpred.php':'lasttraced.php';
 function clearFavicon()
 {
 	var links = document.getElementsByTagName('link');
@@ -132,10 +134,68 @@ function updateTime(time)
 
 	$('#newTimer').html('<div style="display:inline-block;vertical-align:top;padding-right:20px;color:#f00;">+'+tH+':'+tM+':'+tS+'</div><div style="display:inline-block;vertical-align:top;">'+actDate+'</div>');
 }
+function newUpdatePre(data)
+{
+	updateTime(newUpdateTime);
+	//console.log('data', data);
+	var m = data.match(/([0-9]{4}\-[0-9]{2}\-[0-9]{2}\s{0,}[0-9]{2}:[0-9]{2}:[0-9]{2})/);
+	//console.log('match', m);
+	if(m)
+	{
+		var last = m[1];
+		updateTime(last);
+		if(newUpdateHTML != last)
+		{
+			$("#livetable").html(data);
+			var as = document.getElementById('livetable').getElementsByTagName('a');
+			var xtype = as.length > 0?'|'+as[0].innerHTML:'';
+			var group = as.length > 1?'|'+as[1].innerHTML:'';
+			newUpdateColor = as.length > 0?as[0].style.color:'green';
+			if(newUpdateColor[0] == '#')
+			{
+			  newUpdateColor = 'xx'+newUpdateColor.substr(1);
+			}
+			var lastdate = last.substr(11)+xtype+group;
+			if(newUpdateStart == false)	
+			{
+				newUpdateStart = true;
+				newUpdateHTML = last;
+				document.title = lastdate;
+				changeFaviconGreen();
+				console.log('Cos starszego ', last);
+			}
+			else if(newUpdateHTML > last)
+			{
+				newUpdateStart = true;
+				newUpdateHTML = last;
+				document.title = lastdate;
+				blinkFavicon();
+				console.log('Cos starego ', last);
+			}
+			else
+			{
+				newUpdateCount++;
+				newUpdateHTML = last;
+				document.title = lastdate;
+				blinkFavicon();
+				blinkTitle();
+				console.log('Cos nowego ', last);
+				var sfx = new Audio('http://michal.sieciechowicz.pl/live-pre/sfx.wav');
+				sfx.play();
+			}
+		}
+	}
+
+	window.origSetTimeout(newUpdate, 750);	
+}
+function newUpdateTrace()
+{
+	
+}
 function newUpdate() {
 
 	var ts = new Date().getTime();
-	$.get("lastpred.php", {
+	$.get(newUpdateUrl, {
 		ts: ts,
 		type: getLiveOpts(),
 		group: getGroupOpts(),
@@ -143,57 +203,10 @@ function newUpdate() {
 		pretimezone: pretimezone,
 		timezone: timezone 
 	}, function(data) {
-		updateTime(newUpdateTime);
-		//console.log('data', data);
-		var m = data.match(/([0-9]{4}\-[0-9]{2}\-[0-9]{2}\s{0,}[0-9]{2}:[0-9]{2}:[0-9]{2})/);
-		//console.log('match', m);
-		if(m)
-		{
-			var last = m[1];
-			updateTime(last);
-			if(newUpdateHTML != last)
-			{
-				$("#livetable").html(data);
-				var as = document.getElementById('livetable').getElementsByTagName('a');
-				var xtype = as.length > 0?'|'+as[0].innerHTML:'';
-				var group = as.length > 1?'|'+as[1].innerHTML:'';
-				newUpdateColor = as.length > 0?as[0].style.color:'green';
-				if(newUpdateColor[0] == '#')
-				{
-				  newUpdateColor = 'xx'+newUpdateColor.substr(1);
-				}
-				var lastdate = last.substr(11)+xtype+group;
-				if(newUpdateStart == false)	
-				{
-					newUpdateStart = true;
-					newUpdateHTML = last;
-					document.title = lastdate;
-					changeFaviconGreen();
-					console.log('Cos starszego ', last);
-				}
-				else if(newUpdateHTML > last)
-				{
-					newUpdateStart = true;
-					newUpdateHTML = last;
-					document.title = lastdate;
-					blinkFavicon();
-					console.log('Cos starego ', last);
-				}
-				else
-				{
-					newUpdateCount++;
-					newUpdateHTML = last;
-					document.title = lastdate;
-					blinkFavicon();
-					blinkTitle();
-					console.log('Cos nowego ', last);
-					var sfx = new Audio('http://michal.sieciechowicz.pl/live-pre/sfx.wav');
-					sfx.play();
-				}
-			}
-		}
-
-		window.origSetTimeout(newUpdate, 750);
+		if(newUpdateType == 'pre')
+			newUpdatePre(data);
+		else if(newUpdateType == 'trace')
+			newUpdateTrace(data);
 	});
 };
 window.origSetTimeout = window.setTimeout;
