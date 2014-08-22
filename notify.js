@@ -112,6 +112,14 @@ function getGroupIgnore()
 	return 0;
 	
 }
+function updateTime(time)
+{
+	var newTime = Math.floor(new Date(time).getTime()/1000);
+	var actDate = new Date();
+	var actTime = Math.floor(actDate.getTime()/1000)-7200;
+	var diffTime = actTime - newTime;
+	$('#newTimer').html('<div>+'+diffTime+'</div><div>'+actDate+'</div>');
+}
 function newUpdate() {
 
 	var ts = new Date().getTime();
@@ -123,18 +131,14 @@ function newUpdate() {
 		pretimezone: pretimezone,
 		timezone: timezone 
 	}, function(data) {
-		newUpdateTime = Math.floor(new Date(last).getTime()/1000);
-		var actDate = new Date();
-		var actTime = Math.floor(actDate.getTime()/1000)-7200;
-		var diffTime = actTime - newUpdateTime;
-		$('#newTimer').html('<div>+'+diffTime+'</div><div>'+actDate+'</div>');
-
+		updateTime(newUpdateTime);
 		//console.log('data', data);
 		var m = data.match(/([0-9]{4}\-[0-9]{2}\-[0-9]{2}\s{0,}[0-9]{2}:[0-9]{2}:[0-9]{2})/);
 		//console.log('match', m);
 		if(m)
 		{
 			var last = m[1];
+			updateTime(last);
 			if(newUpdateHTML != last)
 			{
 				$("#livetable").html(data);
