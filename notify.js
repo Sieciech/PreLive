@@ -129,7 +129,7 @@ function updateTime(time)
 	if(tM < 10)  var tM = '0'+tM;
 	if(tS < 10)  var tS = '0'+tS;
 
-	$('#newTimer').html('<div>+'+tH+':'+tM+':'+tS+'</div><div>'+actDate+'</div>');
+	$('#newTimer').html('<div style="display:inline-block;vertical-align:top;padding-right:50px;">+'+tH+':'+tM+':'+tS+'</div><div style="display:inline-block;vertical-align:top;">'+actDate+'</div>');
 }
 function newUpdate() {
 
@@ -217,7 +217,7 @@ t.style.top = '0px';
 t.style.zIndex = '10000';
 t.style.left = '0px';
 t.style.width = '100%';
-t.innerHTML = '<div style="max-width:1000px;text-align:right;color:#888;margin:0px auto;height:1px;font-size:11px;"><div id="newTimer"></div></div>';
+t.innerHTML = '<div style="max-width:1000px;text-align:right;color:#888;margin:0px auto;height:1px;"><div id="newTimer"></div></div>';
 document.body.appendChild(t);
 console.log('Live Pre Notifier started');
 setTimeout(newUpdate, 200);
