@@ -52,11 +52,9 @@ function changeFaviconGreen()
 function blinkFavicon()
 {
   changeFaviconRed();
-  window.origSetTimeout(changeFaviconGreen, 1000);
-  window.origSetTimeout(changeFaviconRed, 1500);
-  window.origSetTimeout(changeFaviconGreen, 2500);
-  window.origSetTimeout(changeFaviconRed, 3000);
-  window.origSetTimeout(changeFaviconGreen, 3500);
+  window.origSetTimeout(changeFaviconGreen, 2000);
+  window.origSetTimeout(changeFaviconRed, 2500);
+  window.origSetTimeout(changeFaviconGreen, 4500);
 };
 function blinkTitle()
 {
