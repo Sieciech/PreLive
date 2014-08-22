@@ -165,7 +165,7 @@ function newUpdate() {
 			}
 		}
 
-		window.origSetTimeout(newUpdate, 750);
+		window.origSetTimeout(newUpdate, 1000);
 	});
 };
 window.origSetTimeout = window.setTimeout;
@@ -194,5 +194,5 @@ window.pretimezone = 0;
 
 
 console.log('Live Pre Notifier started');
-setTimeout(newUpdate, 400);
+setTimeout(newUpdate, 200);
 
