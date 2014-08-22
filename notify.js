@@ -123,6 +123,7 @@ function newUpdate() {
 		pretimezone: pretimezone,
 		timezone: timezone 
 	}, function(data) {
+		newUpdateTime = Math.floor(new Date(last).getTime()/1000);
 		var actDate = new Date();
 		var actTime = Math.floor(actDate.getTime()/1000)-7200;
 		var diffTime = actTime - newUpdateTime;
@@ -134,13 +135,12 @@ function newUpdate() {
 		if(m)
 		{
 			var last = m[1];
-			var as = document.getElementById('livetable').getElementsByTagName('a');
-			var group = as.length > 0?as[0].innerHTML:'';
-			var lastdate = last.substr(11)+' '+group;
 			if(newUpdateHTML != last)
 			{
-				newUpdateTime = Math.floor(new Date(last).getTime()/1000);
 				$("#livetable").html(data);
+				var as = document.getElementById('livetable').getElementsByTagName('a');
+				var group = as.length > 0?as[0].innerHTML:'';
+				var lastdate = last.substr(11)+' '+group;
 				if(newUpdateStart == false)	
 				{
 					newUpdateStart = true;
