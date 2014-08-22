@@ -118,7 +118,7 @@ function updateTime(time)
 	var actDate = new Date();
 	var actTime = Math.floor(actDate.getTime()/1000)-7200;
 	var diffTime = actTime - newTime;
-	var actTime = actTime.toLocaleString();
+	var actDate = actDate.toLocaleString();
 	var tH = Math.floor(diffTime/3600);
 	var diffTime = diffTime - (tH*3600);
 	var tM = Math.floor(diffTime/60);
