@@ -64,48 +64,10 @@ function blinkTitle()
   }, 3000);
 };
 function newUpdate() {
-	var ts = new Date().getTime();
-	$.get("lastpred.php", {
-		ts: ts,
-		type: liveopts.join('|'),
-		group: groupopts.join('|'),
-		group_ignore: group_ignore,
-		pretimezone: pretimezone,
-		timezone: timezone 
-	}, function(data) {
-		$("#livetable").html(data);
-		//console.log('data', data);
-		var m = data.match(/([0-9]{4}\-[0-9]{2}\-[0-9]{2}\s{0,}[0-9]{2}:[0-9]{2}:[0-9]{2})/);
-		//console.log('match', m);
-		var last = m[1];
-		if(newUpdateHTML != last)
-		{
-			if(newUpdateStart == false)	
-			{
-				newUpdateStart = true;
-				newUpdateHTML = last;
-				document.title = newUpdateCount+') '+last;
-				changeFaviconGreen();
-				console.log('Cos starego ', last);
 
-			}
-			else
-			{
-				newUpdateCount++;
-				newUpdateHTML = last;
-				document.title = newUpdateCount+') '+last;
-				blinkFavicon();
-				blinkTitle();
-				console.log('Cos nowego ', last);
-				new Audio('http://michal.sieciechowicz.pl/live-pre/sfx.wav').play();
-				//alert('Coś nowego!');
-			}
-		}
 
-		//console.log('newUpdate');
-		window.origSetTimeout(newUpdate, 1000);
-	});
-};
+
+
 var liveopts_str = "";
 var groups_str = "";
 var group_ignore = 0;
@@ -158,8 +120,6 @@ window.setTimeout = function(func, time)
     });
   }
 };
-console.log('Live Pre Notifier started');
-setTimeout(newUpdate, 400);
 $("td[opt='type']", '#filter_tbl').click(function() {
 	var celltext = $(this).text();
 	if (celltext.length > 0) {
@@ -235,5 +195,53 @@ $('#livetable').ajaxStop(function(){
 	});
 	//$('#livetable > table > tbody td[title]').qtip({ content: { text: false }, position: { target: "mouse", adjust: { mouse: true, x: 10, y: 10 } }, show: { delay: 500, solo: true }, hide: { fixed: true }});
 });
+
+
+	var ts = new Date().getTime();
+	$.get("lastpred.php", {
+		ts: ts,
+		type: liveopts.join('|'),
+		group: groupopts.join('|'),
+		group_ignore: group_ignore,
+		pretimezone: pretimezone,
+		timezone: timezone 
+	}, function(data) {
+		$("#livetable").html(data);
+		//console.log('data', data);
+		var m = data.match(/([0-9]{4}\-[0-9]{2}\-[0-9]{2}\s{0,}[0-9]{2}:[0-9]{2}:[0-9]{2})/);
+		//console.log('match', m);
+		var last = m[1];
+		if(newUpdateHTML != last)
+		{
+			if(newUpdateStart == false)	
+			{
+				newUpdateStart = true;
+				newUpdateHTML = last;
+				document.title = newUpdateCount+') '+last;
+				changeFaviconGreen();
+				console.log('Cos starego ', last);
+
+			}
+			else
+			{
+				newUpdateCount++;
+				newUpdateHTML = last;
+				document.title = newUpdateCount+') '+last;
+				blinkFavicon();
+				blinkTitle();
+				console.log('Cos nowego ', last);
+				new Audio('http://michal.sieciechowicz.pl/live-pre/sfx.wav').play();
+				//alert('Coś nowego!');
+			}
+		}
+
+		//console.log('newUpdate');
+		window.origSetTimeout(newUpdate, 1000);
+	});
+};
+
+console.log('Live Pre Notifier started');
+setTimeout(newUpdate, 400);
+
 
 
