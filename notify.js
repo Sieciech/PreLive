@@ -135,8 +135,17 @@ function newUpdate() {
 				newUpdateHTML = last;
 				document.title = newUpdateCount+') '+last;
 				changeFaviconGreen();
-				console.log('Cos starego ', last);
+				console.log('Cos starszego ', last);
 
+			}
+			else if(newUpdateHTML < last)
+			{
+				newUpdateStart = true;
+				newUpdateHTML = last;
+				document.title = newUpdateCount+') '+last;
+				blinkFavicon();
+				console.log('Cos starego ', last);
+	
 			}
 			else
 			{
