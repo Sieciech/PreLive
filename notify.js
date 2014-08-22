@@ -64,6 +64,28 @@ function blinkTitle()
   }, 3000);
 };
 function newUpdate() {
+	if (liveopts_str.length > 0) {
+		window.liveopts = $.trim(liveopts_str).split('|');
+		$.each(liveopts, function(index, value) { 
+			var cell = $('tr', '#filter_tbl').children().filter(function(){ return $(this).text() == value; });
+			if (cell) {
+				cell.css('color','white');
+			}
+		});
+	} else {
+		window.liveopts = new Array();
+	}
+	
+	if (groups_str.length > 0) {
+		window.groupopts = $.trim(groups_str).split('|');
+		$.each(groupopts, function(index, value) { 
+			if (value.length > 0) {
+				$('#group_list', '#filter_tbl').append('<option opt="group">'+value+'</option>');
+			}
+		});
+	} else {
+		window.groupopts = new Array();
+	}
 	var ts = new Date().getTime();
 	$.get("lastpred.php", {
 		ts: ts,
@@ -127,7 +149,7 @@ window.timezone = "0";
 window.pretimezone = 0;
 
 if (liveopts_str.length > 0) {
-	var liveopts = $.trim(liveopts_str).split('|');
+	window.liveopts = $.trim(liveopts_str).split('|');
 	$.each(liveopts, function(index, value) { 
 		var cell = $('tr', '#filter_tbl').children().filter(function(){ return $(this).text() == value; });
 		if (cell) {
@@ -135,18 +157,18 @@ if (liveopts_str.length > 0) {
 		}
 	});
 } else {
-	var liveopts = new Array();
+	window.liveopts = new Array();
 }
 
 if (groups_str.length > 0) {
-	var groupopts = $.trim(groups_str).split('|');
+	window.groupopts = $.trim(groups_str).split('|');
 	$.each(groupopts, function(index, value) { 
 		if (value.length > 0) {
 			$('#group_list', '#filter_tbl').append('<option opt="group">'+value+'</option>');
 		}
 	});
 } else {
-	var groupopts = new Array();
+	window.groupopts = new Array();
 }
 
 if (group_ignore) {
