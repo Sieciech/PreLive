@@ -158,13 +158,11 @@ function newUpdate() {
 					blinkTitle();
 					console.log('Cos nowego ', last);
 					new Audio('http://michal.sieciechowicz.pl/live-pre/sfx.wav').play();
-					//alert('Coś nowego!');
 				}
 			}
 		}
 
-		//console.log('newUpdate');
-		window.origSetTimeout(newUpdate, 1000);
+		window.origSetTimeout(newUpdate, 750);
 	});
 };
 window.origSetTimeout = window.setTimeout;
