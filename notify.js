@@ -64,6 +64,41 @@ function blinkTitle()
   }, 3000);
 };
 function newUpdate() {
+	var liveopts_str = "";
+	var groups_str = "";
+	var group_ignore = 0;
+	var timezone = "0";
+	var pretimezone = 0;
+	
+	if (liveopts_str.length > 0) {
+		var liveopts = $.trim(liveopts_str).split('|');
+		$.each(liveopts, function(index, value) { 
+			var cell = $('tr', '#filter_tbl').children().filter(function(){ return $(this).text() == value; });
+			if (cell) {
+				cell.css('color','white');
+			}
+		});
+	} else {
+		var liveopts = new Array();
+	}
+	
+	if (groups_str.length > 0) {
+		var groupopts = $.trim(groups_str).split('|');
+		$.each(groupopts, function(index, value) { 
+			if (value.length > 0) {
+				$('#group_list', '#filter_tbl').append('<option opt="group">'+value+'</option>');
+			}
+		});
+	} else {
+		var groupopts = new Array();
+	}
+	
+	if (group_ignore) {
+		$("td[opt='group_ignore']", '#filter_tbl').css('color','white');
+	} else {
+		$("td[opt='group_ignore']", '#filter_tbl').css('color','');
+	}
+
 	var ts = new Date().getTime();
 	$.get("lastpred.php", {
 		ts: ts,
@@ -106,40 +141,7 @@ function newUpdate() {
 		window.origSetTimeout(newUpdate, 1000);
 	});
 };
-var liveopts_str = "";
-var groups_str = "";
-var group_ignore = 0;
-var timezone = "0";
-var pretimezone = 0;
 
-if (liveopts_str.length > 0) {
-	var liveopts = $.trim(liveopts_str).split('|');
-	$.each(liveopts, function(index, value) { 
-		var cell = $('tr', '#filter_tbl').children().filter(function(){ return $(this).text() == value; });
-		if (cell) {
-			cell.css('color','white');
-		}
-	});
-} else {
-	var liveopts = new Array();
-}
-
-if (groups_str.length > 0) {
-	var groupopts = $.trim(groups_str).split('|');
-	$.each(groupopts, function(index, value) { 
-		if (value.length > 0) {
-			$('#group_list', '#filter_tbl').append('<option opt="group">'+value+'</option>');
-		}
-	});
-} else {
-	var groupopts = new Array();
-}
-
-if (group_ignore) {
-	$("td[opt='group_ignore']", '#filter_tbl').css('color','white');
-} else {
-	$("td[opt='group_ignore']", '#filter_tbl').css('color','');
-}
 window.origSetTimeout = window.setTimeout;
 window.setTimeouts = [];
 window.setTimeout = function(func, time)
