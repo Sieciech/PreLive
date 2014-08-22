@@ -50,7 +50,11 @@ function changeFaviconGreen()
 function blinkFavicon()
 {
   changeFaviconRed();
-  window.origSetTimeout(changeFaviconGreen, 3000);
+  window.origSetTimeout(changeFaviconGreen, 1000);
+  window.origSetTimeout(changeFaviconRed, 1500);
+  window.origSetTimeout(changeFaviconGreen, 2500);
+  window.origSetTimeout(changeFaviconRed, 3000);
+  window.origSetTimeout(changeFaviconGreen, 3500);
 };
 function blinkTitle()
 {
@@ -80,7 +84,33 @@ function getLiveOpts()
 }
 function getGroupOpts()
 {
-	return '';
+	var tds = document.getElementsByTagName('option');
+	var types = [];
+	for(var i=0; i<tds.length; i++)
+	{
+		var td = tds[i];
+		if(td.hasAttribute('opt') && td.getAttribute('opt') == 'group')
+		{
+		  if(td.style.color == 'white')
+		    types.push(td.innerHTML);
+		}
+	}
+	return types.join('|');
+}
+function getGroupIgnore()
+{
+	var tds = document.getElementsByTagName('td');
+	var types = [];
+	for(var i=0; i<tds.length; i++)
+	{
+		var td = tds[i];
+		if(td.hasAttribute('opt') && td.getAttribute('opt') == 'group_ignore')
+		{
+		  return (td.style.color == 'white');
+		}
+	}
+	return false;
+	
 }
 function newUpdate() {
 
@@ -89,7 +119,7 @@ function newUpdate() {
 		ts: ts,
 		type: getLiveOpts(),
 		group: getGroupOpts(),
-		group_ignore: group_ignore,
+		group_ignore: getGroupIgnore(),
 		pretimezone: pretimezone,
 		timezone: timezone 
 	}, function(data) {
@@ -136,7 +166,7 @@ window.setTimeout = function(func, time)
 
   if(!updater)
   {
-    var i = window.origSetTimeout(func, time);
+    window.origSetTimeout(func, time);
   }
 };
 
