@@ -187,7 +187,7 @@ function newUpdate() {
 			}
 		}
 
-		window.origSetTimeout(newUpdate, 1000);
+		window.origSetTimeout(newUpdate, 750);
 	});
 };
 window.origSetTimeout = window.setTimeout;
