@@ -12,15 +12,19 @@ function changeFavicon(src) {
  }
  document.head.appendChild(link);
 }
+function rand()
+{
+	return Math.round(Math.random()*1000000000);
+}
 function changeFaviconRed()
 {
-  var icon = 'http://michal.sieciechowicz.pl/live-pre/red_'+newUpdateCount+'.png';
+  var icon = 'http://michal.sieciechowicz.pl/live-pre/red_'+newUpdateCount+'.png?rnd='+rand();
   console.log('icon', icon)
   changeFavicon(icon);
 }
 function changeFaviconGreen()
 {
-  var icon = 'http://michal.sieciechowicz.pl/live-pre/green_'+newUpdateCount+'.png';
+  var icon = 'http://michal.sieciechowicz.pl/live-pre/green_'+newUpdateCount+'.png?rnd='+rand();
   console.log('icon', icon)
   changeFavicon(icon);
 }
@@ -74,7 +78,7 @@ function newUpdate() {
 				blinkFavicon();
 				blinkTitle();
 				console.log('Cos nowego ', last);
-				//alert('Coś nowego!');
+				alert('Coś nowego!');
 			}
 		}
 
