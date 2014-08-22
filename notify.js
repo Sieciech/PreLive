@@ -138,7 +138,7 @@ function newUpdate() {
 				console.log('Cos starszego ', last);
 
 			}
-			else if(newUpdateHTML < last)
+			else if(newUpdateHTML > last)
 			{
 				newUpdateStart = true;
 				newUpdateHTML = last;
