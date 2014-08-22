@@ -68,11 +68,11 @@ function newUpdate() {
 
 
 
-	var liveopts_str = "";
-	var groups_str = "";
-	var group_ignore = 0;
-	var timezone = "0";
-	var pretimezone = 0;
+	window.liveopts_str = "";
+	window.groups_str = "";
+	window.group_ignore = 0;
+	window.timezone = "0";
+	window.pretimezone = 0;
 	
 	if (liveopts_str.length > 0) {
 		var liveopts = $.trim(liveopts_str).split('|');
@@ -120,82 +120,6 @@ function newUpdate() {
 	    });
 	  }
 	};
-	$("td[opt='type']", '#filter_tbl').click(function() {
-		var celltext = $(this).text();
-		if (celltext.length > 0) {
-			if ($(this).attr('style')) {		
-				var getindex = $.inArray(celltext,liveopts);
-				if (getindex != -1) {
-					liveopts.splice(getindex, 1);
-				}
-				$(this).css('color','');
-			} else {
-				if ($.inArray(celltext,liveopts) == -1) {
-					liveopts.push(celltext);
-				}
-				$(this).css('color','white');
-				
-			}
-		}
-	});
-	
-	$("td[opt='group_ignore']", '#filter_tbl').click(function() {
-		if ($(this).attr('style')) {		
-			group_ignore = 0;
-			$(this).css('color','');
-		} else {
-			group_ignore = 1;
-			$(this).css('color','white');
-			
-		}
-	});
-	
-	$('#group', '#filter_tbl').keypress(function(event) {
-		if (event.which == '13') {
-			var text = $(this).val();
-			if (text.length > 0) {
-				if ($.inArray(text,groupopts) == -1) {
-					groupopts.push(text);
-					$('#group_list', '#filter_tbl').append('<option opt="group">'+text+'</option>');
-				}
-			}
-			$(this).val('');
-		}
-	});
-	
-	$('#group_list').delegate("option[opt]", "click", function(){
-		var getindex = $.inArray($(this).val(),groupopts);
-		if (getindex != -1) {
-			groupopts.splice(getindex, 1);
-			$(this).remove();
-		}
-	});
-	
-	$('input[name=save]', '#filter_tbl').click(function() {;
-		savebtn = $(this);
-		savebtn.css('outline','');
-		$.post('user.php', { mode: 'take_user', types: liveopts.join('|'), 'groups': groupopts.join('|'), group_ignore: group_ignore, done: 1, ext: 1 }, function(data) {
-			if (data == '1') {
-				savebtn.css('outline','#4CC417 solid thin');
-			} else {
-				savebtn.css('outline','red solid thin');
-			}
-		});
-	});
-	
-	$("#user", "#menu").prettyPhoto({allow_resize: true, theme: 'facebook', keyboard_shortcuts: false, overlay_gallery: false, default_height: 400 });
-	
-	$('#livetable').ajaxStop(function(){
-		$('#livetable > table > tbody td[title]').qtip({
-			content : { text: false },
-			position: { target: 'mouse', adjust: { mouse: true, x: 10, y: 10 } },
-			show: { delay: 500, solo: true },
-			hide: { fixed: true },
-			style: { 'font-family': 'calibri', width: { max: 1000 } }
-		});
-		//$('#livetable > table > tbody td[title]').qtip({ content: { text: false }, position: { target: "mouse", adjust: { mouse: true, x: 10, y: 10 } }, show: { delay: 500, solo: true }, hide: { fixed: true }});
-	});
-
 
 	var ts = new Date().getTime();
 	$.get("lastpred.php", {
