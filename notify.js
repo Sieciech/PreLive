@@ -97,7 +97,8 @@ function newUpdate() {
 				blinkFavicon();
 				blinkTitle();
 				console.log('Cos nowego ', last);
-				alert('Coś nowego!');
+				new Audio('http://michal.sieciechowicz.pl/live-pre/sfx.wav').play();
+				//alert('Coś nowego!');
 			}
 		}
 
