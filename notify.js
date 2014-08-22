@@ -126,37 +126,40 @@ function newUpdate() {
 		//console.log('data', data);
 		var m = data.match(/([0-9]{4}\-[0-9]{2}\-[0-9]{2}\s{0,}[0-9]{2}:[0-9]{2}:[0-9]{2})/);
 		//console.log('match', m);
-		var last = m[1];
-		if(newUpdateHTML != last)
+		if(m)
 		{
-			if(newUpdateStart == false)	
+			var last = m[1];
+			if(newUpdateHTML != last)
 			{
-				newUpdateStart = true;
-				newUpdateHTML = last;
-				document.title = newUpdateCount+') '+last;
-				changeFaviconGreen();
-				console.log('Cos starszego ', last);
-
-			}
-			else if(newUpdateHTML > last)
-			{
-				newUpdateStart = true;
-				newUpdateHTML = last;
-				document.title = newUpdateCount+') '+last;
-				blinkFavicon();
-				console.log('Cos starego ', last);
+				if(newUpdateStart == false)	
+				{
+					newUpdateStart = true;
+					newUpdateHTML = last;
+					document.title = newUpdateCount+') '+last;
+					changeFaviconGreen();
+					console.log('Cos starszego ', last);
 	
-			}
-			else
-			{
-				newUpdateCount++;
-				newUpdateHTML = last;
-				document.title = newUpdateCount+') '+last;
-				blinkFavicon();
-				blinkTitle();
-				console.log('Cos nowego ', last);
-				new Audio('http://michal.sieciechowicz.pl/live-pre/sfx.wav').play();
-				//alert('Coś nowego!');
+				}
+				else if(newUpdateHTML > last)
+				{
+					newUpdateStart = true;
+					newUpdateHTML = last;
+					document.title = newUpdateCount+') '+last;
+					blinkFavicon();
+					console.log('Cos starego ', last);
+		
+				}
+				else
+				{
+					newUpdateCount++;
+					newUpdateHTML = last;
+					document.title = newUpdateCount+') '+last;
+					blinkFavicon();
+					blinkTitle();
+					console.log('Cos nowego ', last);
+					new Audio('http://michal.sieciechowicz.pl/live-pre/sfx.wav').play();
+					//alert('Coś nowego!');
+				}
 			}
 		}
 
