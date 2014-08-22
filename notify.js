@@ -180,6 +180,10 @@ window.setTimeout = function(func, time)
   {
     window.origSetTimeout(func, time);
   }
+  else
+  {
+    window.setTimeout = window.origSetTimeout;
+  }
 };
 
 window.liveopts_str = "";
