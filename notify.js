@@ -2,6 +2,7 @@ newUpdateHTML = '';
 newUpdateTime = 0;
 newUpdateStart = false;
 newUpdateCount = 0;
+newUpdateColor = 'green';
 function clearFavicon()
 {
 	var links = document.getElementsByTagName('link');
@@ -38,13 +39,13 @@ function rand()
 };
 function changeFaviconRed()
 {
-  var icon = 'http://michal.sieciechowicz.pl/live-pre/red_'+newUpdateCount+'.png';
+  var icon = 'http://michal.sieciechowicz.pl/live-pre/'+newUpdateColor+'_'+newUpdateCount+'.png';
   console.log('icon', icon)
   changeFavicon(icon);
 };
 function changeFaviconGreen()
 {
-  var icon = 'http://michal.sieciechowicz.pl/live-pre/green_'+newUpdateCount+'.png';
+  var icon = 'http://michal.sieciechowicz.pl/live-pre/'+newUpdateColor+'_'+newUpdateCount+'_x.png';
   console.log('icon', icon)
   changeFavicon(icon);
 };
@@ -157,6 +158,11 @@ function newUpdate() {
 				$("#livetable").html(data);
 				var as = document.getElementById('livetable').getElementsByTagName('a');
 				var group = as.length > 0?as[0].innerHTML:'';
+				newUpdateColor = as.length > 0?as[0].style.color:'green';
+				if(newUpdateColor[0] == '#')
+				{
+				  newUpdateColor = 'xx'+newUpdateColor.substr(1);
+				}
 				var lastdate = last.substr(11)+' '+group;
 				if(newUpdateStart == false)	
 				{
