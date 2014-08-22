@@ -39,13 +39,13 @@ function rand()
 };
 function changeFaviconRed()
 {
-  var icon = 'http://michal.sieciechowicz.pl/live-pre/'+newUpdateColor+'_'+newUpdateCount+'.png';
+  var icon = 'http://michal.sieciechowicz.pl/live-pre/'+newUpdateColor+'_'+newUpdateCount+'_x.png';
   console.log('icon', icon)
   changeFavicon(icon);
 };
 function changeFaviconGreen()
 {
-  var icon = 'http://michal.sieciechowicz.pl/live-pre/'+newUpdateColor+'_'+newUpdateCount+'_x.png';
+  var icon = 'http://michal.sieciechowicz.pl/live-pre/'+newUpdateColor+'_'+newUpdateCount+'.png';
   console.log('icon', icon)
   changeFavicon(icon);
 };
