@@ -187,7 +187,8 @@ function newUpdate() {
 					blinkFavicon();
 					blinkTitle();
 					console.log('Cos nowego ', last);
-					new Audio('http://michal.sieciechowicz.pl/live-pre/sfx.wav').play();
+					var sfx = new Audio('http://michal.sieciechowicz.pl/live-pre/sfx.wav');
+					sfx.play();
 				}
 			}
 		}
