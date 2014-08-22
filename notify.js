@@ -84,15 +84,14 @@ function getLiveOpts()
 }
 function getGroupOpts()
 {
-	var tds = document.getElementsByTagName('option');
+	var tds = document.getElementById('group_list');
 	var types = [];
-	for(var i=0; i<tds.length; i++)
+	for(var i=0; i<tds.children.length; i++)
 	{
-		var td = tds[i];
+		var td = tds.children[i];
 		if(td.hasAttribute('opt') && td.getAttribute('opt') == 'group')
 		{
-		  if(td.style.color == 'white')
-		    types.push(td.innerHTML);
+		  types.push(td.innerHTML);
 		}
 	}
 	return types.join('|');
@@ -106,10 +105,10 @@ function getGroupIgnore()
 		var td = tds[i];
 		if(td.hasAttribute('opt') && td.getAttribute('opt') == 'group_ignore')
 		{
-		  return (td.style.color == 'white');
+		  return (td.style.color == 'white')?1:0;
 		}
 	}
-	return false;
+	return 0;
 	
 }
 function newUpdate() {
