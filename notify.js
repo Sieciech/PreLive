@@ -63,34 +63,32 @@ function blinkTitle()
   	  document.title = window.oldTitle;
   }, 3000);
 };
+function getLiveOpts()
+{
+	var tds = document.getElementsByTagName('td');
+	var types = [];
+	for(var i=0; i<tds.length; i++)
+	{
+		var td = tds[i];
+		if(td.hasAttribute('opt') && td.getAttribute('opt') == 'type')
+		{
+		  if(td.style.color == 'white')
+		    types.push(td.innerHTML);
+		}
+	}
+	return types.join('|');
+}
+function getGroupOpts()
+{
+	return '';
+}
 function newUpdate() {
-	if (liveopts_str.length > 0) {
-		window.liveopts = $.trim(liveopts_str).split('|');
-		$.each(liveopts, function(index, value) { 
-			var cell = $('tr', '#filter_tbl').children().filter(function(){ return $(this).text() == value; });
-			if (cell) {
-				cell.css('color','white');
-			}
-		});
-	} else {
-		window.liveopts = new Array();
-	}
-	
-	if (groups_str.length > 0) {
-		window.groupopts = $.trim(groups_str).split('|');
-		$.each(groupopts, function(index, value) { 
-			if (value.length > 0) {
-				$('#group_list', '#filter_tbl').append('<option opt="group">'+value+'</option>');
-			}
-		});
-	} else {
-		window.groupopts = new Array();
-	}
+
 	var ts = new Date().getTime();
 	$.get("lastpred.php", {
 		ts: ts,
-		type: liveopts.join('|'),
-		group: groupopts.join('|'),
+		type: getLiveOpts(),
+		group: getGroupOpts(),
 		group_ignore: group_ignore,
 		pretimezone: pretimezone,
 		timezone: timezone 
@@ -148,34 +146,6 @@ window.group_ignore = 0;
 window.timezone = "0";
 window.pretimezone = 0;
 
-if (liveopts_str.length > 0) {
-	window.liveopts = $.trim(liveopts_str).split('|');
-	$.each(liveopts, function(index, value) { 
-		var cell = $('tr', '#filter_tbl').children().filter(function(){ return $(this).text() == value; });
-		if (cell) {
-			cell.css('color','white');
-		}
-	});
-} else {
-	window.liveopts = new Array();
-}
-
-if (groups_str.length > 0) {
-	window.groupopts = $.trim(groups_str).split('|');
-	$.each(groupopts, function(index, value) { 
-		if (value.length > 0) {
-			$('#group_list', '#filter_tbl').append('<option opt="group">'+value+'</option>');
-		}
-	});
-} else {
-	window.groupopts = new Array();
-}
-
-if (group_ignore) {
-	$("td[opt='group_ignore']", '#filter_tbl').css('color','white');
-} else {
-	$("td[opt='group_ignore']", '#filter_tbl').css('color','');
-}
 
 console.log('Live Pre Notifier started');
 setTimeout(newUpdate, 400);
