@@ -135,7 +135,7 @@ function newUpdate() {
 				{
 					newUpdateStart = true;
 					newUpdateHTML = last;
-					document.title = newUpdateCount+') '+last;
+					document.title = last;
 					changeFaviconGreen();
 					console.log('Cos starszego ', last);
 	
@@ -144,7 +144,7 @@ function newUpdate() {
 				{
 					newUpdateStart = true;
 					newUpdateHTML = last;
-					document.title = newUpdateCount+') '+last;
+					document.title = last;
 					blinkFavicon();
 					console.log('Cos starego ', last);
 		
@@ -153,7 +153,7 @@ function newUpdate() {
 				{
 					newUpdateCount++;
 					newUpdateHTML = last;
-					document.title = newUpdateCount+') '+last;
+					document.title = last;
 					blinkFavicon();
 					blinkTitle();
 					console.log('Cos nowego ', last);
