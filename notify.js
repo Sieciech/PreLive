@@ -117,8 +117,19 @@ function updateTime(time)
 	var newTime = Math.floor(new Date(time).getTime()/1000);
 	var actDate = new Date();
 	var actTime = Math.floor(actDate.getTime()/1000)-7200;
+	var actTime = actTime.toLocaleString();
 	var diffTime = actTime - newTime;
-	$('#newTimer').html('<div>+'+diffTime+'</div><div>'+actDate+'</div>');
+	var tH = Math.floor(diffTime/3600);
+	var diffTime = diffTime - (tH*3600);
+	var tM = Math.floor(diffTime/60);
+	var diffTime = diffTime - (tM*60);
+	var tS = diffTime%60;
+	
+	if(tH < 10)  var tH = '0'+tH;
+	if(tM < 10)  var tM = '0'+tM;
+	if(tS < 10)  var tS = '0'+tS;
+
+	$('#newTimer').html('<div>+'+tH+':'+tM+':'+tS+'</div><div>'+actDate+'</div>');
 }
 function newUpdate() {
 
