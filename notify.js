@@ -1,4 +1,5 @@
 newUpdateHTML = '';
+newUpdateTime = 0;
 newUpdateStart = false;
 newUpdateCount = 0;
 function clearFavicon()
@@ -122,7 +123,6 @@ function newUpdate() {
 		pretimezone: pretimezone,
 		timezone: timezone 
 	}, function(data) {
-		$("#livetable").html(data);
 		//console.log('data', data);
 		var m = data.match(/([0-9]{4}\-[0-9]{2}\-[0-9]{2}\s{0,}[0-9]{2}:[0-9]{2}:[0-9]{2})/);
 		//console.log('match', m);
@@ -134,6 +134,12 @@ function newUpdate() {
 			var lastdate = last.substr(11)+' '+group;
 			if(newUpdateHTML != last)
 			{
+				newUpdateTime = Math.floor(new Date(last).getTime()/1000);
+				var actDate = new Date();
+				var actTime = Math.floor(actDate.getTime()/1000)-7200;
+				var diffTime = actTime - newUpdateTime;
+				$('newTimer').html('<div>+'+diffTime+'</div><div>'+actDate+'</div>');
+				$("#livetable").html(data);
 				if(newUpdateStart == false)	
 				{
 					newUpdateStart = true;
@@ -141,7 +147,6 @@ function newUpdate() {
 					document.title = lastdate;
 					changeFaviconGreen();
 					console.log('Cos starszego ', last);
-	
 				}
 				else if(newUpdateHTML > last)
 				{
@@ -150,7 +155,6 @@ function newUpdate() {
 					document.title = lastdate;
 					blinkFavicon();
 					console.log('Cos starego ', last);
-		
 				}
 				else
 				{
@@ -191,8 +195,14 @@ window.groups_str = "";
 window.group_ignore = 0;
 window.timezone = "0";
 window.pretimezone = 0;
-
-
+var t = document.createelement('div');
+t.style.position = 'absolute';
+t.style.top = '0px';
+t.style.zIndex = '10000';
+t.style.left = '0px';
+t.style.width = '100%';
+t.innerHTML = '<div style="max-width:100%;text-align:right;color:#888;margin:0px auto;height:1px;><div id="newTimer"></div></div>';
+document.body.appendChild(t);
 console.log('Live Pre Notifier started');
 setTimeout(newUpdate, 200);
 
