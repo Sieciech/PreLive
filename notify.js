@@ -157,14 +157,14 @@ function newUpdate() {
 			{
 				$("#livetable").html(data);
 				var as = document.getElementById('livetable').getElementsByTagName('a');
-				var xtype = as.length > 0?'| '+as[0].innerHTML:'';
-				var group = as.length > 1?'| '+as[1].innerHTML:'';
+				var xtype = as.length > 0?'|'+as[0].innerHTML:'';
+				var group = as.length > 1?'|'+as[1].innerHTML:'';
 				newUpdateColor = as.length > 0?as[0].style.color:'green';
 				if(newUpdateColor[0] == '#')
 				{
 				  newUpdateColor = 'xx'+newUpdateColor.substr(1);
 				}
-				var lastdate = last.substr(11)+' '+xtype+' '+group;
+				var lastdate = last.substr(11)+xtype+group;
 				if(newUpdateStart == false)	
 				{
 					newUpdateStart = true;
