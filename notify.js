@@ -118,7 +118,9 @@ function updateTime(time)
 	var actDate = new Date();
 	var actTime = Math.floor(actDate.getTime()/1000)-7200;
 	var diffTime = actTime - newTime;
-	var actDate = actDate.toLocaleString();
+	var actDate = actDate.toJSON();
+	var actDate = actDate.substring(0, 19);
+	var actDate = actDate.replace('T', ' ');
 	var tH = Math.floor(diffTime/3600);
 	var diffTime = diffTime - (tH*3600);
 	var tM = Math.floor(diffTime/60);
