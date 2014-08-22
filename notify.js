@@ -106,24 +106,19 @@ function newUpdate() {
 		window.origSetTimeout(newUpdate, 1000);
 	});
 };
-	window.origSetTimeout = window.setTimeout;
-	window.setTimeouts = [];
-	window.setTimeout = function(func, time)
-	{
-	  var fstr = func.toString();
-	  var updater = fstr.match(/window\.setTimeout\(update,\s/i)?true:false;
-	  //console.log('func', updater);
-	
-	  if(!updater)
-	  {
-	    var i = window.origSetTimeout(func, time);
-	    window.setTimeouts.push({
-	      i: i,
-	      func: func,
-	      time: time,
-	    });
-	  }
-	};
+window.origSetTimeout = window.setTimeout;
+window.setTimeouts = [];
+window.setTimeout = function(func, time)
+{
+  var fstr = func.toString();
+  var updater = fstr.match(/window\.setTimeout\(update,\s/i)?true:false;
+  //console.log('func', updater);
+
+  if(!updater)
+  {
+    var i = window.origSetTimeout(func, time);
+  }
+};
 
 window.liveopts_str = "";
 window.groups_str = "";
