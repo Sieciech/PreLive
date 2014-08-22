@@ -1,38 +1,57 @@
 newUpdateHTML = '';
 newUpdateStart = false;
 newUpdateCount = 0;
-function changeFavicon(src) {
- var link = document.createElement('link'),
-     oldLink = document.getElementById('dynamic-favicon');
- link.id = 'dynamic-favicon';
- link.rel = 'shortcut icon';
- link.href = src;
- if (oldLink) {
-  document.head.removeChild(oldLink);
- }
- document.head.appendChild(link);
-}
+function clearFavicon()
+{
+	var links = document.getElementsByTagName('link');
+	for(var i=0; i<links.length; i++)
+	{
+		var l = links[i];
+		if(l.hasAttribute('rel'))
+		{
+			var rel = l.getAttribute('rel');
+			if(rel == 'icon' || rel == 'shortcut icon')
+			{
+				l.parentNode.removeChild(l);
+			}
+		}
+	}
+};
+function changeFavicon(src)
+{
+	clearFavicon();
+  var link = document.createElement('link'),
+  oldLink = document.getElementById('dynamic-favicon');
+  link.id = 'dynamic-favicon';
+  link.rel = 'shortcut icon';
+  link.href = src;
+  if (oldLink)
+  {
+   document.head.removeChild(oldLink);
+  }
+  document.head.appendChild(link);
+};
 function rand()
 {
 	return Math.round(Math.random()*1000000000);
-}
+};
 function changeFaviconRed()
 {
   var icon = 'http://michal.sieciechowicz.pl/live-pre/red_'+newUpdateCount+'.png?rnd='+rand();
   console.log('icon', icon)
   changeFavicon(icon);
-}
+};
 function changeFaviconGreen()
 {
   var icon = 'http://michal.sieciechowicz.pl/live-pre/green_'+newUpdateCount+'.png?rnd='+rand();
   console.log('icon', icon)
   changeFavicon(icon);
-}
+};
 function blinkFavicon()
 {
   changeFaviconRed();
   window.origSetTimeout(changeFaviconGreen, 3000);
-}
+};
 function blinkTitle()
 {
   window.oldTitle = document.title;
@@ -43,7 +62,7 @@ function blinkTitle()
   	if(document.title == window.netTitle)
   	  document.title = window.oldTitle;
   }, 3000);
-}
+};
 function newUpdate() {
 	var ts = new Date().getTime();
 	$.get("lastpred.php", {
@@ -85,7 +104,7 @@ function newUpdate() {
 		//console.log('newUpdate');
 		window.origSetTimeout(newUpdate, 1000);
 	});
-}
+};
 var liveopts_str = "";
 var groups_str = "";
 var group_ignore = 0;
