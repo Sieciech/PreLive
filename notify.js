@@ -129,13 +129,16 @@ function newUpdate() {
 		if(m)
 		{
 			var last = m[1];
+			var as = document.getElementById('livetable').getElementsByTagName('a');
+			var group = as.length > 0?as[0].innerHTML:'';
+			var lastdate = last.substr(11)+' '+group;
 			if(newUpdateHTML != last)
 			{
 				if(newUpdateStart == false)	
 				{
 					newUpdateStart = true;
 					newUpdateHTML = last;
-					document.title = last;
+					document.title = lastdate;
 					changeFaviconGreen();
 					console.log('Cos starszego ', last);
 	
@@ -144,7 +147,7 @@ function newUpdate() {
 				{
 					newUpdateStart = true;
 					newUpdateHTML = last;
-					document.title = last;
+					document.title = lastdate;
 					blinkFavicon();
 					console.log('Cos starego ', last);
 		
@@ -153,7 +156,7 @@ function newUpdate() {
 				{
 					newUpdateCount++;
 					newUpdateHTML = last;
-					document.title = last;
+					document.title = lastdate;
 					blinkFavicon();
 					blinkTitle();
 					console.log('Cos nowego ', last);
